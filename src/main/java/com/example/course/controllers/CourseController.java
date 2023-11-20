@@ -36,12 +36,7 @@ public class CourseController {
     @DeleteMapping("/delete/{id}")
     public Boolean deleteCourse(@PathVariable int id) {
         System.out.println("id equals to " + id);
-        try {
-            courseService.delCourse(id);
-        } catch (Exception e) {
-            // TODO: handle exception
-            System.out.println(e);
-        }
+        courseService.delCourse(id);
 
         return true;
     }
