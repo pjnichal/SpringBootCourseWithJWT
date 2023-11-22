@@ -15,6 +15,10 @@ import java.util.List;
 import com.example.course.entity.AppRole;
 import com.example.course.entity.AppUser;
 import com.example.course.services.AppUserService;
+import com.example.course.services.AuthService;
+import com.example.course.utils.AuthenticationRequest;
+import com.example.course.utils.AuthenticationResponse;
+import com.example.course.utils.RegisterRequest;
 
 import lombok.Data;
 
@@ -22,13 +26,31 @@ import lombok.Data;
 @RequestMapping("/api")
 public class AppUserController {
     @Autowired
+    private AuthService authService;
+    @Autowired
     private AppUserService appUserService;
+
+    @PostMapping("/auth/signUp")
+    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request) {
+        return ResponseEntity.ok(authService.register(request));
+    }
+
+    @PostMapping("/auth/login")
+    public ResponseEntity<AuthenticationResponse> auth(@RequestBody AuthenticationRequest request) {
+        return ResponseEntity.ok(authService.login(request));
+    }
 
     @GetMapping("/users/getAllUsers")
     public ResponseEntity<List<AppUser>> getUsers() {
 
         List<AppUser> appUsers = appUserService.getAllUsers();
         return ResponseEntity.ok().body(appUsers);
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<String> getUser() {
+
+        return ResponseEntity.ok().body("MOYE MOYE");
     }
 
     @PostMapping("/users/saveUser")
@@ -44,8 +66,6 @@ public class AppUserController {
                 .create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/saveRole").toUriString());
         return ResponseEntity.created(uri).body(appUserService.saveAppRole(appRole));
     }
-
-
 
 }
 
