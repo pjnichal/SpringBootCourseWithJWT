@@ -55,7 +55,7 @@ public class JwtService {
     }
 
     private SecretKey getSignInKey() {
-        byte[] keyBytes = Decoders.BASE64.decode("Pravin");
+        byte[] keyBytes = Decoders.BASE64.decode("javainusesecretkeybhosidchajavainusesecretkeybhosidcha");
         return Keys.hmacShaKeyFor(keyBytes);
     }
 

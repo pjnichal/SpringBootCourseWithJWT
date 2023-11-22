@@ -1,5 +1,6 @@
 package com.example.course.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,9 +16,13 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class AuthService {
+    @Autowired
     private AppUserService appUserService;
+    @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
     private JwtService jwtService;
+    @Autowired
     private AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
@@ -37,6 +42,7 @@ public class AuthService {
 
         AppUser appUser = appUserService.getUser(request.getEmail());
 
+        System.out.println(appUser.getEmail());
         var jwtToken = jwtService.generateToken(appUser);
         return new AuthenticationResponse(jwtToken);
     }
