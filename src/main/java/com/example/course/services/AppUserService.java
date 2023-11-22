@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 @Transactional
 @Slf4j
 public class AppUserService {
+
     @Autowired
     private AppUserRepo appUserRepo;
     @Autowired
@@ -36,21 +38,22 @@ public class AppUserService {
 
     }
 
-    public void addRoleToUser(String email, String rolename) {
-        log.info("save role to user");
-        AppUser user = appUserRepo.findByEmail(email);
-        AppRole appRole = roleRepo.findByName(rolename);
-        user.getRoles().add(appRole);
+    // public void addRoleToUser(String email, String rolename) {
+    //     log.info("save role to user");
+    //     AppUser user = appUserRepo.findByEmail(email);
+    //     AppRole appRole = roleRepo.findByName(rolename);
+    //     user.getRoles().add(appRole);
 
-    }
+    // }
 
-    public AppUser getUser(String email) {
-        log.info("get user");
-        return appUserRepo.findByEmail(email);
-    }
+    // public AppUser getUser(String email) {
+    //     log.info("get user");
+    //     return appUserRepo.findByEmail(email);
+    // }
 
     public List<AppUser> getAllUsers() {
         log.info("get all user");
         return appUserRepo.findAll();
     }
+
 }

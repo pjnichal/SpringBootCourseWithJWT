@@ -1,15 +1,7 @@
 package com.example.course;
 
-import java.util.ArrayList;
-
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
-import com.example.course.entity.AppRole;
-import com.example.course.entity.AppUser;
-import com.example.course.services.AppUserService;
 
 @SpringBootApplication
 public class CourseApplication {

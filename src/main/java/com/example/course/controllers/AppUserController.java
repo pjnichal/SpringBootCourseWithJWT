@@ -45,11 +45,7 @@ public class AppUserController {
         return ResponseEntity.created(uri).body(appUserService.saveAppRole(appRole));
     }
 
-    @PostMapping("/roles/addToUser")
-    public ResponseEntity<?> saveRoleToUser(@RequestBody RoleToUserForm roleToUserForm) {
-        appUserService.addRoleToUser(roleToUserForm.getEmail(), roleToUserForm.getRoleName());
-        return ResponseEntity.ok().build();
-    }
+
 
 }
 
