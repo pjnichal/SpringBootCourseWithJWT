@@ -3,6 +3,7 @@ package com.example.course.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -24,20 +25,22 @@ import lombok.RequiredArgsConstructor;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
+    @Autowired
     private CustomAuthFilter customAuthFilter;
-    private AuthenticationProvider authenticationProvider;
+
     @Autowired
     private AppUserService appUserService;
 
     @Bean
+    @DependsOn("authenticationProvider")
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(
-                        requests -> requests.requestMatchers("api/auth/**").permitAll().anyRequest().permitAll()
+                        requests -> requests.requestMatchers("api/auth/**").permitAll()
                                 .anyRequest()
                                 .authenticated())
                 .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authenticationProvider(authenticationProvider)
+                .authenticationProvider(authenticationProvider())
                 .addFilterBefore(customAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();
