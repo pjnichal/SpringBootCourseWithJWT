@@ -6,7 +6,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.course.entity.AppUser;
-import com.example.course.repository.AppUserRepo;
 import com.example.course.utils.AuthenticationRequest;
 import com.example.course.utils.AuthenticationResponse;
 import com.example.course.utils.RegisterRequest;
